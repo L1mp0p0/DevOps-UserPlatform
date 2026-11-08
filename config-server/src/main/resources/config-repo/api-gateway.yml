@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+# Параметры Circuit Breaker шлюза (читаются в GatewayCircuitBreakerProperties)
+gateway:
+  circuit-breaker:
+    sliding-window-size: 10        # сколько последних вызовов анализируем
+    minimum-calls: 5               # минимум вызовов до оценки процента ошибок
+    failure-rate-threshold: 50     # % ошибок, после которого цепь размыкается
+    wait-in-open-state: 10s        # сколько цепь остаётся разомкнутой
+    timeout: 3s                    # ответ дольше этого времени считается ошибкой

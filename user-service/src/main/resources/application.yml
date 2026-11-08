@@ -1,0 +1,7 @@
+# Локально хранится только то, что нужно для подключения к Config Server.
+# БД, Kafka, порт и остальное приходят из config-repo/user-service.yml
+spring:
+  application:
+    name: user-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}

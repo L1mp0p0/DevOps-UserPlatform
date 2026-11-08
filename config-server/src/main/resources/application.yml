@@ -1,0 +1,23 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native          # конфигурация берётся из файлов (см. search-locations)
+  cloud:
+    config:
+      server:
+        native:
+          # Конфиги сервисов лежат в src/main/resources/config-repo.
+          # Чтобы брать их из Git, замени блок native на:
+          #   git:
+          #     uri: https://github.com/<user>/<config-repo>.git
+          search-locations: classpath:/config-repo/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

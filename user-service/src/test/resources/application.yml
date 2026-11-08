@@ -1,0 +1,28 @@
+# Конфигурация тестов (заменяет application.yml): без Config Server, Eureka и Docker.
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+  kafka:
+    # bootstrap-servers задаёт @EmbeddedKafka (bootstrapServersProperty)
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+
+eureka:
+  client:
+    enabled: false
+
+app:
+  kafka:
+    topic: user-events

@@ -1,0 +1,9 @@
+# Профиль "docker": адреса берутся из docker-compose (postgres, kafka - имена сервисов).
+# Логин и пароль БД учебные; в реальном проекте шифруются ({cipher}...) или берутся из Vault.
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/user_service
+    username: postgres
+    password: postgres
+  kafka:
+    bootstrap-servers: kafka:9092

@@ -1,0 +1,8 @@
+# Локально хранится только то, что нужно для подключения к Config Server.
+# Kafka, SMTP, порт приходят из config-repo/notification-service.yml
+# (логин и пароль почты: переменные окружения SPRING_MAIL_USERNAME / SPRING_MAIL_PASSWORD)
+spring:
+  application:
+    name: notification-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}

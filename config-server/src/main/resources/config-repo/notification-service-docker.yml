@@ -1,0 +1,20 @@
+# Профиль "docker": Kafka в соседнем контейнере, почта уходит в Mailpit (ловушка писем, UI на :8025),
+# поэтому реальный почтовый аккаунт для проверки не нужен.
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+  mail:
+    host: mailpit
+    port: 1025
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+
+management:
+  health:
+    mail:
+      enabled: false     # недоступность SMTP не должна делать сервис "нездоровым"
+
+app:
+  mail:
+    from: noreply@user-platform.local

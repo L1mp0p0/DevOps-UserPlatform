@@ -1,0 +1,29 @@
+# Профиль "test": полная конфигурация для тестов без Config Server и Eureka.
+# Почта -> GreenMail на 127.0.0.1:32525, Kafka -> @EmbeddedKafka.
+spring:
+  kafka:
+    # bootstrap-servers задаёт @EmbeddedKafka (bootstrapServersProperty)
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: org.example.notification.dto.UserEventMessage
+        spring.json.use.type.headers: false
+        spring.json.trusted.packages: org.example.notification.dto
+  mail:
+    host: 127.0.0.1
+    port: 32525
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+
+app:
+  kafka:
+    topic: user-events
+  mail:
+    from: noreply@test.local

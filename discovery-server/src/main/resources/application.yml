@@ -1,0 +1,22 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-server
+
+eureka:
+  client:
+    # сам Eureka-сервер не регистрируется в себе и не тянет реестр
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false   # для разработки: быстро убирать упавшие экземпляры
+    use-read-only-response-cache: false
+    response-cache-update-interval-ms: 3000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
